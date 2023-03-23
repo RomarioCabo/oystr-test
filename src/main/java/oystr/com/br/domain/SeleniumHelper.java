@@ -11,6 +11,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @Slf4j
 public abstract class SeleniumHelper {
   protected String getTextFromElement(WebDriver driver, String xPath) {
+    if (xPath.isEmpty()) {
+      return "Não informado";
+    }
+
     WebElement element =
         new WebDriverWait(driver, Duration.ofSeconds(20))
             .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
@@ -21,11 +25,15 @@ public abstract class SeleniumHelper {
     return elementText;
   }
 
-  protected String getUrlFromElement(WebDriver driver, String xPath, String attributeName) {
+  protected String getUrlFromElement(WebDriver driver, String xPath) {
+    if (xPath.isEmpty()) {
+      return "URL não encotrada";
+    }
+
     WebElement element =
         new WebDriverWait(driver, Duration.ofSeconds(20))
             .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
-    String urlFromElement = element.getAttribute(attributeName);
+    String urlFromElement = element.getAttribute("src");
 
     log.info("UrlFromElement ---> {}", urlFromElement);
 
