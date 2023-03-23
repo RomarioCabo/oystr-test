@@ -1,0 +1,14 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: oystr-robot-test
+  scan:
+    base-packages: oystr.com.br.infrastructure.config
+
+logging:
+  level:
+    root: INFO
+    org.openqa.selenium: SEVERE
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
