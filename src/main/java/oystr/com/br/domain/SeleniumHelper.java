@@ -3,6 +3,7 @@ package oystr.com.br.domain;
 import java.time.Duration;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,14 +16,18 @@ public abstract class SeleniumHelper {
       return "Não informado";
     }
 
-    WebElement element =
-        new WebDriverWait(driver, Duration.ofSeconds(20))
-            .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
-    String elementText = element.getText();
+    try {
+      WebElement element =
+          new WebDriverWait(driver, Duration.ofSeconds(20))
+              .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
+      String elementText = element.getText();
 
-    log.info("TextFromElement ---> {}", elementText);
+      log.info("TextFromElement ---> {}", elementText);
 
-    return elementText;
+      return elementText;
+    } catch (TimeoutException e) {
+      return "Não informado";
+    }
   }
 
   protected String getUrlFromElement(WebDriver driver, String xPath) {
@@ -30,13 +35,17 @@ public abstract class SeleniumHelper {
       return "URL não encotrada";
     }
 
-    WebElement element =
-        new WebDriverWait(driver, Duration.ofSeconds(20))
-            .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
-    String urlFromElement = element.getAttribute("src");
+    try {
+      WebElement element =
+          new WebDriverWait(driver, Duration.ofSeconds(20))
+              .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
+      String urlFromElement = element.getAttribute("src");
 
-    log.info("UrlFromElement ---> {}", urlFromElement);
+      log.info("UrlFromElement ---> {}", urlFromElement);
 
-    return urlFromElement;
+      return urlFromElement;
+    } catch (TimeoutException e) {
+      return "URL não encotrada";
+    }
   }
 }
