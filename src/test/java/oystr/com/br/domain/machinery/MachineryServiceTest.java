@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -15,6 +16,7 @@ class MachineryServiceTest {
   @Mock private MachineryService machineryService;
 
   @Test
+  @DisplayName("should return machinery")
   void testGetInformationOfMachinery() {
     List<String> sites = new ArrayList<>();
     sites.add("https://www.agrofy.com.br/montana-2011-4x4-full-3-0-221cv-turbo-diesel.html");
